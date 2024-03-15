@@ -2,7 +2,7 @@ public class Pellets extends Space{
     private int points;
 
     public Pellets(int points) {
-        super("🌟 ");
+        super("*");
         this.points = points;
     }
 
