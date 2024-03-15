@@ -1,5 +1,5 @@
 public class Grid {
-    private Player playerUp;
+    private Player player;
     private Player playerDown;
     private Player playerLeft;
     private Player playerRight;
@@ -11,11 +11,10 @@ public class Grid {
 
     public Grid() {
         pellet = new Pellets(5);
-        playerUp = new Player("V");
-        playerDown = new Player("^");
-        playerLeft = new Player(">");
-        playerRight = new Player("<");
+        player = new Player("V");
         space = new Space("_");
+        ghost = new Ghost();
+        block = new Block();
     }
 
     public void gridSetup() {
@@ -58,23 +57,59 @@ public class Grid {
     }
 
     public void printGrid() {
-        for (int col = 0 ; col < grid.length; col++) {
-            for (int row = 0; row < grid[0].length; row++) {
-                System.out.print(grid[row][col] + " ");
+        for (int row = 0 ; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                System.out.print(grid[row][col].getSymbol() + "  ");
             }
             System.out.println();
         }
     }
+
+    public void addPellets(int numPellets,int rows,int cols) {
+        for (int i = 0; i < numPellets; i++) {
+            int row = (int) (Math.random() * rows);
+            int col = (int) (Math.random() * cols);
+            if (grid[row][col] == space) {
+                grid[row][col] = pellet;
+            } else {
+                i--;
+            }
+        }
+    }
+
+
 }
-/*
-█ █ █ █ █ █ O O O O
-_ _ _ _ _ █ O _ _ O
-O O O O O █ O O O O
-_ _ _ _ _ █ _ _ _ _
-_ █ █ █ █ █ _ █ █ _
-_ █ █ █ █ _ O _ █ _
-_ █ █ █ █ _ G _ █ █
-_ _ _ _ _ _ O _ _ _
-_ █ █ █ █ █ █ █ █ _
-_ _ _ _ > _ _ _ _ _
- */
+//        _  _  _  _  _  _  _  _  _  _  _
+//        _  █  █  █  █  █  █  █  █  █  _
+//        _  █  _  _  _  _  _  _  _  █  _
+//        _  █  _  █  █  █  █  █  _  █  _
+//        _  █  _  █  _  _  _  █  _  █  _
+//        _  █  _  █  _  █  █  █  _  █  _
+//        _  █  _  █  _  _  _  _  _  █  _
+//        _  █  _  █  █  █  █  █  █  █  _
+//        _  █  _  _  _  _  _  _  _  _  _
+//        _  █  █  █  █  █  █  █  _  _  _
+//        _  _  _  _  _  _  _  _  _  _  _
+
+//        *  *  _  _  _  _  _  *  *
+//        *  _  █  _  _  _  █  _  *
+//        _  _  █  _  _  _  █  _  _
+//        _  _  █  █  █  █  █  _  _
+//        _  _  _  _  █  _  _  _  _
+//        _  _  _  _  █  _  _  _  _
+//        _  _  _  _  █  _  _  _  _
+//        *  _  █  █  _  █  █  _  *
+//        *  *  █  _  _  _  █  *  *
+//        _  _  _  _  _  _  _  _  _
+
+
+
+//        *  *  _  _  _  _  _  *  *
+//        *  █  █  _  █  _  █  █  *
+//        _  █  _  _  █  _  _  █  _
+//        _  █  _  _  █  _  _  █  _
+//        _  █  █  █  █  █  █  █  _
+//        _  █  _  _  █  _  _  █  _
+//        _  █  _  _  █  _  _  █  _
+//        *  █  █  _  █  _  █  █  *
+//        *  *  _  _  _  _  _  *  *
