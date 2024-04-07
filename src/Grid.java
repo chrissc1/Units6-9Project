@@ -2,12 +2,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Grid {
-    private Player player;
-    private Space space;
-    private Pellets pellet;
-    private Block block;
+    private final Player player;
+    private final Space space;
+    private final Pellets pellet;
+    private final Block block;
     private Space[][] grid;
-    private int[] pos;
+    private final int[] pos;
     private int point;
     private int score;
     private int highScore;
@@ -28,7 +28,6 @@ public class Grid {
         while (play) {
             if (score == 100) {
                 score = 0;
-                turns = 0;
             }
             System.out.println("Score: " + score);
             Scanner scan = new Scanner(System.in);
