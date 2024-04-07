@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Grid {
     private final Player player;
     private final Space space;
-    private final Pellets pellet;
+    private Pellets pellet;
     private final Block block;
     private Space[][] grid;
     private final int[] pos;
@@ -13,7 +13,6 @@ public class Grid {
     private int highScore;
 
     public Grid() {
-        pellet = new Pellets(5);
         player = new Player("V");
         space = new Space("_");
         block = new Block();
@@ -172,8 +171,20 @@ public class Grid {
             grid[1][6] = block;
             grid[7][2] = block;
             grid[7][6] = block;
-            point = 5;
-            addPellets(20, 9, 9);
+            int rand = (int) (Math.random() * 4);
+            if (rand == 0) {
+                pellet = new Pellets(10);
+                point = pellet.pointValue();
+                grid = addPellets(10, grid);
+            } else if (rand == 1) {
+                pellet = new Pellets(20);
+                point = pellet.pointValue();
+                grid = addPellets(20, grid);
+            } else if (rand == 2) {
+                pellet = new Pellets(25);
+                point = pellet.pointValue();
+                grid = addPellets(25, grid);
+            }
         } else if (map == 2) {
             grid = new Space[10][9];
             for (Space[] spaces : grid) {
@@ -195,8 +206,20 @@ public class Grid {
             grid[8][2] = block;
             grid[8][6] = block;
             grid[7][4] = space;
-            point = 4;
-            addPellets(25,10,9);
+            int rand = (int) (Math.random() * 4);
+            if (rand == 0) {
+                pellet = new Pellets(10);
+                point = pellet.pointValue();
+                grid = addPellets(10, grid);
+            } else if (rand == 1) {
+                pellet = new Pellets(20);
+                point = pellet.pointValue();
+                grid = addPellets(20, grid);
+            } else if (rand == 2) {
+                pellet = new Pellets(25);
+                point = pellet.pointValue();
+                grid = addPellets(25, grid);
+            }
         } else if (map == 3) {
             grid = new Space[11][11];
             for (Space[] spaces : grid) {
@@ -227,13 +250,25 @@ public class Grid {
                 }
             }
             grid[4][7] = block;
-            point = 10;
-            addPellets(10,11,11);
+            int rand = (int) (Math.random() * 4);
+            if (rand == 0) {
+                pellet = new Pellets(10);
+                point = pellet.pointValue();
+                grid = addPellets(10, grid);
+            } else if (rand == 1) {
+                pellet = new Pellets(20);
+                point = pellet.pointValue();
+                grid = addPellets(20, grid);
+            } else if (rand == 2) {
+                pellet = new Pellets(25);
+                point = pellet.pointValue();
+                grid = addPellets(25, grid);
+            }
         }
         play();
     }
 
-    public void printGrid() {
+    private void printGrid() {
         for (Space[] spaces : grid) {
             for (int col = 0; col < grid[0].length; col++) {
                 System.out.print(spaces[col].getSymbol() + "  ");
@@ -242,12 +277,14 @@ public class Grid {
         }
     }
 
-    public void addPellets(int numPellets,int rows,int cols) {
+    private Space[][] addPellets (int numPellets,Space[][] g) {
+        int rows = g.length;
+        int cols = g[0].length;
         for (int i = 0; i < numPellets; i++) {
             int row = (int) (Math.random() * rows);
             int col = (int) (Math.random() * cols);
-            if (grid[row][col] == space) {
-                grid[row][col] = pellet;
+            if (g[row][col] == space) {
+                g[row][col] = pellet;
             } else {
                 i--;
             }
@@ -255,14 +292,15 @@ public class Grid {
         for (int i = 0; i < 1; i++) {
             int row = (int) (Math.random() * rows);
             int col = (int) (Math.random() * cols);
-            if (grid[row][col] == space) {
-                grid[row][col] = player;
+            if (g[row][col] == space) {
+                g[row][col] = player;
                 pos[0] = row;
                 pos[1] = col;
             } else {
                 i--;
             }
         }
+        return g;
     }
 }
 //        _  _  _  _  _  _  _  _  _  _  _

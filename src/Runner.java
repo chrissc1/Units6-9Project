@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class IDK {
+public class Runner {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Grid grid = new Grid();

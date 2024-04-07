@@ -1,12 +1,12 @@
 public class Pellets extends Space{
-    private int points;
+    private int numPellets;
 
-    public Pellets(int points) {
+    public Pellets(int num) {
         super("*");
-        this.points = points;
+        numPellets = num;
     }
-
-    public int getPoints() {
-        return points;
+    @Override
+    public int pointValue() {
+        return 100/numPellets;
     }
 }
